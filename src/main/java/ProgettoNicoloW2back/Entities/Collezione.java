@@ -5,6 +5,7 @@ import ProgettoNicoloW2back.Eccezioni.GiocoNonTrovato;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Collezione {
@@ -83,6 +84,31 @@ public class Collezione {
         }
     }
 
-    // Creo il metodo per aggiornare tramite ID
+    public void aggiornaGioco(String id, Scanner scanner) throws GiocoNonTrovato {
+        Optional<Gioco> giocoOptional = ricercaPerId(id);
+
+        if (giocoOptional.isPresent()) {
+            Gioco gioco = giocoOptional.get();
+            System.out.println("Gioco trovato: " + gioco.getTitolo());
+
+            System.out.print("Inserisci il nuovo Titolo: ");
+            String nuovoTitolo = scanner.nextLine();
+            gioco.setTitolo(nuovoTitolo);
+
+            System.out.print("Inserisci il nuovo Anno: ");
+            int nuovoAnno = Integer.parseInt(scanner.nextLine());
+            gioco.setAnno(nuovoAnno);
+
+            System.out.print("Inserisci il nuovo Prezzo: ");
+            double nuovoPrezzo = Double.parseDouble(scanner.nextLine());
+            gioco.setPrezzo(nuovoPrezzo);
+
+            System.out.println("Gioco aggiornato con successo.");
+        } else {
+            System.out.println("Nessun gioco trovato con ID: " + id); // Debug
+            throw new GiocoNonTrovato("Gioco non trovato con ID: " + id);
+        }
+    }
+
 
 }
