@@ -1,7 +1,9 @@
 package ProgettoNicoloW2back;
 
+import ProgettoNicoloW2back.Eccezioni.GiocoNonTrovato;
 import ProgettoNicoloW2back.Entities.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -9,6 +11,8 @@ public class Application {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
+
         Collezione collezione = new Collezione();
 
         VideoGioco primoVideoGioco = new VideoGioco("1", "Unchurted", 1990, 20, "Epic Games",
@@ -28,11 +32,26 @@ public class Application {
         }
 
         // testo il metodo di  ricerca attraverso id
-        Optional<Gioco> risultato1 = collezione.ricercaPerId("2");
-        if (risultato1.isPresent()) {
-            System.out.println("Gioco trovato: " + risultato1.get().getTitolo());
-        } else {
-            System.out.println("Nessun gioco trovato con ID 2");
+        try {
+            Optional<Gioco> risultato = collezione.ricercaPerId("2");
+            risultato.ifPresent(gioco -> System.out.println("Gioco trovato: " + gioco.getTitolo()));
+        } catch (GiocoNonTrovato e) {
+            System.out.println(e.getMessage());
+        }
+
+        // testo il metodo per la ricerca con il criterio del  prezzo
+        System.out.print("Inserisci il prezzo massimo per la ricerca: ");
+
+        double prezzo = scanner.nextDouble();
+
+        try {
+            List<Gioco> giochiTrovati = collezione.ricercaPerPrezzo(prezzo);
+            System.out.println("Giochi trovati con prezzo inferiore a " + prezzo + ":");
+            for (Gioco gioco : giochiTrovati) {
+                System.out.println(gioco.getTitolo() + " - Prezzo: " + gioco.getPrezzo());
+            }
+        } catch (GiocoNonTrovato e) {
+            System.out.println(e.getMessage());
         }
 
     }

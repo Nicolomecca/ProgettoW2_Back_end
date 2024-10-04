@@ -1,5 +1,7 @@
 package ProgettoNicoloW2back.Entities;
 
+import ProgettoNicoloW2back.Eccezioni.GiocoNonTrovato;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +19,28 @@ public class Collezione {
     }
 
     // Creo il metodo per ricercare un gioco per ID
-    public Optional<Gioco> ricercaPerId(String id) {
-        return giochi.stream().filter(g -> g.getId().equals(id)).findFirst();
+    public Optional<Gioco> ricercaPerId(String id) throws GiocoNonTrovato {
+        Optional<Gioco> giocoTrovato = giochi.stream().filter(g -> g.getId().equals(id)).findFirst();
+        if (giocoTrovato.isEmpty()) {
+            throw new GiocoNonTrovato("Nessun gioco trovato con ID :" + id);
+        } else {
+            return giocoTrovato;
+        }
+
+    }
+
+    // Creo il metodo per ricercare giochi in base al prezzo
+    public List<Gioco> ricercaPerPrezzo(double prezzo) throws GiocoNonTrovato {
+        List<Gioco> giochiFiltratiPerPrezzo = new ArrayList<>();
+
+        for (Gioco gioco : giochi) {
+            if (gioco.getPrezzo() < prezzo) {
+                giochiFiltratiPerPrezzo.add(gioco);
+            } else {
+                throw new GiocoNonTrovato("Nessun gioco trovato al di sotto del prezzo: " + prezzo);
+            }
+        }
+
+        return giochiFiltratiPerPrezzo;
     }
 }
