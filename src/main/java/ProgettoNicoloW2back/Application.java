@@ -54,5 +54,32 @@ public class Application {
             System.out.println(e.getMessage());
         }
 
+        // Testo il metodo  per la ricerca Numero Di Giocatori
+        System.out.print("Inserisci il numero di giocatori : ");
+        int numeroGiocatori = scanner.nextInt();
+
+        try {
+            List<GiocoDaTavolo> giochiTrovati = collezione.ricercaPerNumeroDiGiocatori(numeroGiocatori);
+            System.out.println("Giochi da tavolo trovati per " + numeroGiocatori + " giocatori:");
+            for (GiocoDaTavolo gioco : giochiTrovati) {
+                System.out.println(gioco.getTitolo() + " - Numero di giocatori: " + gioco.getNumeroGiocatori());
+            }
+        } catch (GiocoNonTrovato e) {
+            System.out.println(e.getMessage());
+        }
+        // Testo il metodo  per la rimozione tramite id
+
+        // Test del metodo rimuoviPerId
+
+
+        try {
+            Gioco giocoRimosso = collezione.rimuoviPerId("2");
+            System.out.println("Gioco rimosso con successo: " + giocoRimosso.getTitolo());
+            System.out.println("Lista aggiornata di giochi:");
+            collezione.stampaGiochi();
+        } catch (GiocoNonTrovato e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }
