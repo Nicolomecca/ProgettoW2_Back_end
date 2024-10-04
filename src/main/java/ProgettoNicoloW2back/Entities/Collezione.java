@@ -109,6 +109,5 @@ public class Collezione {
             throw new GiocoNonTrovato("Gioco non trovato con ID: " + id);
         }
     }
-
-
+    
 }
