@@ -1,10 +1,8 @@
 package ProgettoNicoloW2back;
 
-import ProgettoNicoloW2back.Entities.Collezione;
-import ProgettoNicoloW2back.Entities.Genere;
-import ProgettoNicoloW2back.Entities.GiocoDaTavolo;
-import ProgettoNicoloW2back.Entities.VideoGioco;
+import ProgettoNicoloW2back.Entities.*;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Application {
@@ -18,7 +16,7 @@ public class Application {
         GiocoDaTavolo primoGiocoDaTavolo = new GiocoDaTavolo("2", "Monopoly", 1960, 35,
                 6, 1);
 
-        // inserisco nella collezione i giochi creati propagando l'eccezione
+        // inserisco nella collezione i giochi creati propagando l'eccezione e testo il metodo aggiungi
         try {
             collezione.aggiungiGioco(primoVideoGioco);
             System.out.println("VideoGioco  aggiunto con successo." + primoVideoGioco);
@@ -27,6 +25,14 @@ public class Application {
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+
+        // testo il metodo di  ricerca attraverso id
+        Optional<Gioco> risultato1 = collezione.ricercaPerId("2");
+        if (risultato1.isPresent()) {
+            System.out.println("Gioco trovato: " + risultato1.get().getTitolo());
+        } else {
+            System.out.println("Nessun gioco trovato con ID 2");
         }
 
     }
