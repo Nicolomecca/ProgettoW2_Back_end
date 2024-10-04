@@ -1,6 +1,6 @@
 package ProgettoNicoloW2back.Entities;
 
-public class VideoGioco extends Giochi {
+public class VideoGioco extends Gioco {
     private String piattaforma;
     private int durata;
     private Genere genere;
@@ -33,5 +33,18 @@ public class VideoGioco extends Giochi {
 
     public void setGenere(Genere genere) {
         this.genere = genere;
+    }
+
+    @Override
+    public String toString() {
+        return "VideoGioco{" +
+                "id='" + getId() + '\'' +
+                ", titolo='" + getTitolo() + '\'' +
+                ", anno=" + getAnno() +
+                ", prezzo=" + getPrezzo() +
+                ", piattaforma='" + piattaforma + '\'' +
+                ", durata=" + durata +
+                ", genere=" + genere +
+                '}';
     }
 }

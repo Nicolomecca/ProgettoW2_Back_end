@@ -1,6 +1,6 @@
 package ProgettoNicoloW2back.Entities;
 
-public class GiocoDaTavolo extends Giochi {
+public class GiocoDaTavolo extends Gioco {
     private int numeroGiocatori;
     private int durataMediaPartita;
 
@@ -25,5 +25,17 @@ public class GiocoDaTavolo extends Giochi {
 
     public void setDurataMediaPartita(int durataMediaPartita) {
         this.durataMediaPartita = durataMediaPartita;
+    }
+
+    @Override
+    public String toString() {
+        return "GiocoDaTavolo{" +
+                "id='" + getId() + '\'' +
+                ", titolo='" + getTitolo() + '\'' +
+                ", anno=" + getAnno() +
+                ", prezzo=" + getPrezzo() +
+                ", numeroGiocatori=" + numeroGiocatori +
+                ", durataMediaPartita=" + durataMediaPartita +
+                '}';
     }
 }

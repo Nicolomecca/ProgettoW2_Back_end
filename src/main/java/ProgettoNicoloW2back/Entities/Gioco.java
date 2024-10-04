@@ -1,12 +1,12 @@
 package ProgettoNicoloW2back.Entities;
 
-public abstract class Giochi {
+public abstract class Gioco {
     private String id;
     private String titolo;
     private int anno;
     private double prezzo;
 
-    public Giochi(String id, String titolo, int anno, double prezzo) {
+    public Gioco(String id, String titolo, int anno, double prezzo) {
         this.id = id;
         this.titolo = titolo;
         this.anno = anno;
@@ -40,5 +40,15 @@ public abstract class Giochi {
 
     public void setPrezzo(double prezzo) {
         this.prezzo = prezzo;
+    }
+
+    @Override
+    public String toString() {
+        return "Gioco{" +
+                "id='" + id + '\'' +
+                ", titolo='" + titolo + '\'' +
+                ", anno=" + anno +
+                ", prezzo=" + prezzo +
+                '}';
     }
 }
